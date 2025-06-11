@@ -1,0 +1,159 @@
+/*---- Resume modal backdrop -------------------------*/
+.resume-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* Show it when “active” */
+.resume-modal.active {
+  display: flex;
+}
+
+/* The white box */
+.resume-modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 80vh;
+  max-width: 800px;
+  position: relative;
+  text-align: center;
+}
+
+/* Close button */
+.resume-modal-close {
+  position: absolute;
+  top: 0.5rem; right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* The three bars */
+.resume-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+.resume-list li + li {
+  margin-top: 0.75rem;
+}
+.resume-list a {
+  display: block;
+  background: #333;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background .2s ease;
+}
+.resume-list a:hover {
+  background: #555;
+}
+
+/* Accordion Buttons */
+.resume-toggle {
+  width: 100%;
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.resume-toggle:hover {
+  background: #555;
+}
+
+/* Hidden PDF container */
+.resume-content {
+  display: none;
+  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* When item is open, show it */
+.resume-item.open .resume-content {
+  display: block;
+}
+
+/* Spacing between items */
+.resume-item + .resume-item {
+  margin-top: 1rem;
+}
+
+/* 1) Remove the old transition */
+.resume-modal-content {
+  opacity: 0;
+  transform: scale(0.8);
+  /* no transition here any more */
+}
+
+/* 2) Animate in when active */
+.resume-modal.active .resume-modal-content {
+  animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+/* 3) Define the “pop” keyframes */
+@keyframes modalPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  60% {
+    /* overshoot just a bit for that bounce */
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* 1. Start closed (max-height = 0) */
+.resume-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+/* 2. When .open, expand to reveal the embed */
+.resume-item.open .resume-content {
+  /* a little more than your embed height */
+  max-height: 450px;
+}
+
+.resume-toggle {
+  position: relative;
+  padding-right: 2rem; /* space for arrow */
+}
+
+/* add arrow */
+.resume-toggle::after {
+  content: '▼';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease-out;
+}
+
+/* rotate when open */
+.resume-item.open .resume-toggle::after {
+  transform: translateY(-50%) rotate(-180deg);
+}

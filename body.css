@@ -1,0 +1,173 @@
+/* ── GENERAL SECTION LAYOUT ─────────────────────────────────────────────── */
+section {
+  scroll-margin-top: 60px;
+  padding: 30px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+/* ── ABOUT SECTION ─────────────────────────────────────────────────────── */
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-img {
+  flex: 0 0 40%;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.about-text {
+  flex: 1;
+}
+
+/* slide-in stagger */
+.about-img,
+.about-text h2,
+.about-text p {
+  opacity: 0;
+  transition: opacity .6s ease-out, transform .6s ease-out;
+}
+
+.about-img { transform: translateX(-50px); }
+.about-text h2,
+.about-text p { transform: translateX(50px); }
+
+.about-section.visible .about-img       { opacity:1; transform:translateX(0); transition-delay:.1s; }
+.about-section.visible .about-text h2  { opacity:1; transform:translateX(0); transition-delay:.3s; }
+.about-section.visible .about-text p   { opacity:1; transform:translateX(0); transition-delay:.5s; }
+
+/* responsive stack */
+@media (max-width: 768px) {
+  .about-container { flex-direction: column; text-align: center; }
+  .about-img { max-width: 80%; margin-bottom: 1rem; }
+}
+
+/* ── EDUCATION SECTION ────────────────────────────────────────────────── */
+.education-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.education-text { flex: 1; }
+.education-img {
+  flex: 0 0 40%;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* slide-in stagger */
+.education-img,
+.education-text h2,
+.education-text p {
+  opacity: 0;
+  transition: opacity .6s ease-out, transform .6s ease-out;
+}
+
+.education-img { transform: translateX(50px); }
+.education-text h2,
+.education-text p { transform: translateX(-50px); }
+
+.education-section.visible .education-img      { opacity:1; transform:translateX(0); transition-delay:.1s; }
+.education-section.visible .education-text h2 { opacity:1; transform:translateX(0); transition-delay:.3s; }
+.education-section.visible .education-text p  { opacity:1; transform:translateX(0); transition-delay:.5s; }
+
+/* responsive stack */
+@media (max-width: 768px) {
+  .education-container { flex-direction: column; text-align: center; }
+  .education-img { max-width: 80%; margin-bottom: 1rem; }
+}
+
+/* ── WORK SECTION ─────────────────────────────────────────────────────── */
+.work-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.work-images {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "img1 img3"
+    "img2 img3";
+  gap: 1rem;
+  /* keep roughly 40% width of the container */
+  flex: 0 0 40%;
+}
+
+
+.work-images .work-img {
+  width: 80%;           /* shrink them a bit */
+  max-width: 200px;     
+  margin: 0 auto;       /* center each in its cell */
+  border-radius: 8px;
+  object-fit: cover;
+
+  /* start off-screen & invisible */
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity .6s ease-out, transform .6s ease-out;
+}
+
+.work-images .work-img:nth-child(1) { grid-area: img1; }
+.work-images .work-img:nth-child(2) { grid-area: img2; }
+.work-images .work-img:nth-child(3) { grid-area: img3; }
+
+.work-text { flex: 1; }
+
+/* ── STAGGERED ENTRY ────────────────────────────────────────────── */
+.work-section.visible .work-images .work-img:nth-child(1) {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: .1s;
+}
+.work-section.visible .work-images .work-img:nth-child(2) {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: .3s;
+}
+.work-section.visible .work-images .work-img:nth-child(3) {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: .5s;
+}
+
+/* ── TEXT SLIDE-IN (after images) ───────────────────────────────── */
+.work-text h2,
+.work-text p {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity .6s ease-out, transform .6s ease-out;
+}
+.work-section.visible .work-text h2 {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: .7s;
+}
+.work-section.visible .work-text p {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: .9s;
+}
+
+/* responsive stack */
+@media (max-width: 768px) {
+  .work-container { flex-direction: column; text-align: center; }
+  .work-images .work-img { max-width: 80%; }
+}
