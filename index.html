@@ -61,35 +61,61 @@
   </header>
 
   <!-- Resume Modal -->
-  <div id="resume-modal" class="resume-modal">
-    <div class="resume-modal-content">
-      <button class="resume-modal-close">&times;</button>
-      <div class="resume-accordion">
+<!-- Resume Modal -->
+<div id="resume-modal" class="resume-modal" aria-hidden="true">
+  <div class="resume-modal-content">
+    <button class="resume-modal-close" aria-label="Close resume viewer">&times;</button>
 
-        <div class="resume-item">
-          <button class="resume-toggle">ECE Resume</button>
-          <div class="resume-content">
-            <embed src="Resume/Rick Unite ECE Resume.pdf" type="application/pdf" width="100%" height="400px" />
+    <header class="resume-modal-header">
+      <h2>Resumes</h2>
+      <p>View and download my latest resumes.</p>
+    </header>
+
+    <div class="resume-accordion">
+
+      <!-- ECE Resume -->
+      <div class="resume-item">
+        <button class="resume-toggle">
+          <span>ECE Resume</span>
+        </button>
+        <div class="resume-content">
+          <div class="resume-viewer">
+            <div class="resume-viewer-toolbar">
+              <div class="resume-viewer-title">
+                <span class="resume-doc-label">PDF</span>
+                <span class="resume-doc-name">Rick Unite ECE Resume</span>
+              </div>
+
+              <div class="resume-viewer-actions">
+                <a href="Resume/Rick Unite ECE Resume.pdf"
+                   target="_blank"
+                   class="viewer-btn">
+                  Open in new tab
+                </a>
+                <a href="Resume/Rick Unite ECE Resume.pdf"
+                   download
+                   class="viewer-btn viewer-btn-outline">
+                  Download
+                </a>
+              </div>
+            </div>
+
+            <div class="resume-viewer-body">
+              <iframe
+                class="resume-pdf-frame"
+                src="Resume/Rick Unite ECE Resume.pdf#toolbar=0&navpanes=0"
+                title="Rick Unite ECE Resume PDF">
+              </iframe>
+            </div>
           </div>
         </div>
-
-        <div class="resume-item">
-          <button class="resume-toggle">IT Resume</button>
-          <div class="resume-content">
-            <embed src="Resume/Rick Unite IT Resume.pdf" type="application/pdf" width="100%" height="400px" />
-          </div>
-        </div>
-
-        <div class="resume-item">
-          <button class="resume-toggle">Customer Service Resume</button>
-          <div class="resume-content">
-            <embed src="Resume/Rick Unite Customer Service Resume.pdf" type="application/pdf" width="100%" height="400px" />
-          </div>
-        </div>
-
       </div>
+
     </div>
   </div>
+</div>
+
+
 
 
   <!-- 3) ALL YOUR TEXTUAL CONTENT STARTS HERE -->

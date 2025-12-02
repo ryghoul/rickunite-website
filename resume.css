@@ -1,10 +1,26 @@
 /*---- Resume modal backdrop -------------------------*/
+/* -------------------- Theme Tokens -------------------- */
+:root {
+  --resume-backdrop: rgba(15, 23, 42, 0.75);   /* dark slate */
+  --resume-surface: #0b1220;                  /* deep navy */
+  --resume-surface-alt: #020617;
+  --resume-border: rgba(148, 163, 184, 0.35); /* slate-300 */
+  --resume-text: #e5e7eb;                     /* light gray */
+  --resume-muted: #9ca3af;
+  --resume-accent: #4f46e5;                   /* indigo – swap for your brand */
+  --resume-accent-soft: rgba(79, 70, 229, 0.15);
+}
+
+/* ---- Resume modal backdrop ------------------------- */
 .resume-modal {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.7);
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--resume-backdrop);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   align-items: center;
   justify-content: center;
   z-index: 2000;
@@ -15,28 +31,294 @@
   display: flex;
 }
 
-/* The white box */
+/* ---- Modal container ------------------------- */
 .resume-modal-content {
-  background: #fff;
-  border-radius: 8px;
-  padding: 1.5rem;
-  width: 80vh;
-  max-width: 800px;
   position: relative;
-  text-align: center;
+  background: radial-gradient(circle at top left, var(--resume-surface), var(--resume-surface-alt));
+  color: var(--resume-text);
+  border-radius: 18px;
+  padding: 1.75rem 1.75rem 1.5rem;
+  width: min(90vw, 900px);
+  max-height: 90vh;
+  box-shadow:
+    0 24px 80px rgba(15, 23, 42, 0.75),
+    0 0 0 1px var(--resume-border);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
 }
 
-/* Close button */
+/* Animated in when active */
+.resume-modal.active .resume-modal-content {
+  animation: modalPop 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Pop / slide animation */
+@keyframes modalPop {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---- Header inside modal ------------------------- */
+.resume-modal-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.resume-modal-header p {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--resume-muted);
+}
+
+/* ---- Close button ------------------------- */
 .resume-modal-close {
   position: absolute;
-  top: 0.5rem; right: 0.5rem;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.8);
+  color: var(--resume-muted);
+  font-size: 1.1rem;
+  line-height: 1;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-/* The three bars */
+.resume-modal-close:hover {
+  background: rgba(15, 23, 42, 1);
+  color: #f9fafb;
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.8);
+}
+
+/* ---- Accordion wrapper ------------------------- */
+.resume-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+/* ---- Individual accordion item ------------------------- */
+.resume-item {
+  background: rgba(15, 23, 42, 0.7);
+  border-radius: 14px;
+  border: 1px solid var(--resume-border);
+  overflow: hidden;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.resume-item.open {
+  border-color: var(--resume-accent);
+  background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.18), rgba(15, 23, 42, 0.9));
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+}
+
+/* ---- Accordion button ------------------------- */
+.resume-toggle {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--resume-text);
+  padding: 0.85rem 1rem;
+  font-size: 0.97rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 0.01em;
+}
+
+.resume-toggle span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Chevron */
+.resume-toggle::after {
+  content: '▾';
+  font-size: 0.9rem;
+  color: var(--resume-muted);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.resume-item.open .resume-toggle::after {
+  transform: rotate(-180deg);
+  color: var(--resume-accent);
+}
+
+/* Subtle gradient highlight on hover */
+.resume-toggle:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.15),
+    transparent
+  );
+}
+
+/* ---- Accordion content (PDF wrapper) ------------------------- */
+.resume-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  opacity: 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.resume-item.open .resume-content {
+  max-height: 520px; /* a bit more than iframe height */
+  opacity: 1;
+}
+
+/* ------------ Custom PDF viewer shell ------------ */
+.resume-viewer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  border: 1px solid var(--resume-border);
+  background: radial-gradient(circle at top left,
+              rgba(15, 23, 42, 0.95),
+              rgba(2, 6, 23, 1));
+  overflow: hidden;
+  box-shadow:
+    0 18px 50px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+/* Top toolbar */
+.resume-viewer-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.9rem;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.95),
+    rgba(30, 64, 175, 0.5)
+  );
+  border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+/* Left side title */
+.resume-viewer-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.resume-doc-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  color: var(--resume-muted);
+}
+
+.resume-doc-name {
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+/* Right side buttons */
+.resume-viewer-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.viewer-btn {
+  font-size: 0.78rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: var(--resume-accent);
+  color: #f9fafb;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.45);
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.12s ease;
+}
+
+.viewer-btn:hover {
+  background: #4338ca;
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.6);
+  transform: translateY(-1px);
+}
+
+.viewer-btn-outline {
+  background: transparent;
+  color: var(--resume-text);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  box-shadow: none;
+}
+
+.viewer-btn-outline:hover {
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+}
+
+/* PDF area */
+.resume-viewer-body {
+  background: radial-gradient(circle at top,
+              rgba(15, 23, 42, 0.9),
+              rgba(15, 23, 42, 1));
+  padding: 0.5rem;
+}
+
+/* iframe itself */
+.resume-pdf-frame {
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+  border: 1px solid rgba(30, 64, 175, 0.4);
+  background: #0b1120;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 1);
+}
+
+/* ---- Legacy resume list (if used elsewhere) ---- */
 .resume-list {
   list-style: none;
   padding: 0;
@@ -47,113 +329,36 @@
 }
 .resume-list a {
   display: block;
-  background: #333;
-  color: #fff;
+  background: #111827;
+  color: #f9fafb;
   padding: 0.75rem 1rem;
-  border-radius: 4px;
+  border-radius: 999px;
   text-decoration: none;
   font-weight: 600;
-  transition: background .2s ease;
+  font-size: 0.95rem;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 .resume-list a:hover {
-  background: #555;
+  background: #1f2937;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.7);
 }
 
-/* Accordion Buttons */
-.resume-toggle {
-  width: 100%;
-  background: #333;
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1rem;
-  text-align: left;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background .2s ease;
-}
-.resume-toggle:hover {
-  background: #555;
-}
-
-/* Hidden PDF container */
-.resume-content {
-  display: none;
-  margin-top: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-/* When item is open, show it */
-.resume-item.open .resume-content {
-  display: block;
-}
-
-/* Spacing between items */
-.resume-item + .resume-item {
-  margin-top: 1rem;
-}
-
-/* 1) Remove the old transition */
-.resume-modal-content {
-  opacity: 0;
-  transform: scale(0.8);
-  /* no transition here any more */
-}
-
-/* 2) Animate in when active */
-.resume-modal.active .resume-modal-content {
-  animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-}
-
-/* 3) Define the “pop” keyframes */
-@keyframes modalPop {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
+/* ---- Responsive tweaks ------------------------- */
+@media (max-width: 640px) {
+  .resume-modal-content {
+    width: 92vw;
+    padding: 1.25rem 1.25rem 1rem;
+    border-radius: 16px;
   }
-  60% {
-    /* overshoot just a bit for that bounce */
-    opacity: 1;
-    transform: scale(1.05);
+
+  .resume-viewer-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
   }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+
+  .resume-pdf-frame {
+    height: 320px;
   }
-}
-
-
-/* 1. Start closed (max-height = 0) */
-.resume-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-}
-
-/* 2. When .open, expand to reveal the embed */
-.resume-item.open .resume-content {
-  /* a little more than your embed height */
-  max-height: 450px;
-}
-
-.resume-toggle {
-  position: relative;
-  padding-right: 2rem; /* space for arrow */
-}
-
-/* add arrow */
-.resume-toggle::after {
-  content: '▼';
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: transform 0.3s ease-out;
-}
-
-/* rotate when open */
-.resume-item.open .resume-toggle::after {
-  transform: translateY(-50%) rotate(-180deg);
 }
