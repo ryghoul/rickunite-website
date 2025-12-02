@@ -1,16 +1,18 @@
-/* ── PROJECTS GRID ─────────────────────────────────────────────────────── */
+/* ── PROJECTS GRID ───────────────────────────────────────────────────── */
+
 .projects-section {
   padding: 30px 20px;
 }
 
 .projects-container {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* Project card base style */
 .project-card {
   background: #fafafa;
   border-radius: 8px;
@@ -19,105 +21,127 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease;
+  transform: translateY(0);
+  opacity: 0; /* for slide-in animation */
+  transition:
+    transform 0.6s ease-out,
+    opacity 0.6s ease-out,
+    box-shadow 0.2s ease;
 }
 
+/* Hover state */
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+/* Card image – consistent aspect ratio */
 .project-img {
-  width: 100%; height: 180px;
-  object-fit: cover;
+  width: 100%;
+  aspect-ratio: 16 / 9;  /* keeps all cards same shape */
+  object-fit: cover;     /* crops nicely without squishing */
+  display: block;
 }
 
 .project-info {
-  padding: 1rem; flex: 1;
+  padding: 1rem;
+  flex: 1;
 }
 
-/* responsive grid */
+/* Responsive grid */
 @media (max-width: 992px) {
-  .projects-container { grid-template-columns: repeat(2,1fr); }
+  .projects-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 @media (max-width: 600px) {
-  .projects-container { grid-template-columns: 1fr; }
+  .projects-container {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* ── MODAL OVERLAY ─────────────────────────────────────────────────────── */
+
+/* ── MODAL OVERLAY ───────────────────────────────────────────────────── */
+
 .project-modal {
-  /* keep the flex centering… */
-  position: fixed; top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
   z-index: 2000;
 
-  /* …but start invisible */
+  background: rgba(0, 0, 0, 0.8);
+
+  /* hidden by default */
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
 
-
+/* Shown state (JS adds .active) */
 .project-modal.active {
-  /* fade the backdrop in */
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
-/* ── MODAL CONTENT POP─IN ───────────────────────────────────────────── */
-.modal-content {
-  background: #fff;
-  border-radius: 8px;
-  max-width: 90%;
-  max-height: 90%;
-  overflow-y: auto;
-  padding: 1.5rem;
-  position: relative;
 
-  /* start small & transparent */
+/* ── MODAL CONTENT (CARD) ───────────────────────────────────────────── */
+
+.modal-content {
+  position: relative;
+  background: #ffffff;
+  border-radius: 8px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  padding: 1.5rem 1.5rem 1.25rem;
+  overflow-y: auto;
+
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+
+  /* start small & transparent – animated when modal is active */
   transform: scale(0.8);
   opacity: 0;
 }
 
-.modal-close {
-  position: absolute;
-  top: .5rem; right: .5rem;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
+.project-link-btn {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  background: #111827;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
 }
 
-.modal-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  max-height: 70vh;
-  overflow-y: auto;
-  justify-content: center;
+.project-link-btn:hover {
+  background: #1f2937;
 }
 
-.modal-gallery img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  object-fit: contain;
+.project-link-btn {
+  margin-bottom: 0.75rem;
 }
 
-
-@media (max-width: 600px) {
-  .modal-gallery img { width: calc(50% - .5rem); }
+.slideshow {
+  margin-top: 0.75rem;
 }
 
-/* when the parent .project-modal gets .active, bounce it in */
+/* Pop-in when parent modal becomes active */
 .project-modal.active .modal-content {
-  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* keyframes for a smooth “pop & settle” */
 @keyframes popIn {
   0% {
     opacity: 0;
@@ -132,13 +156,72 @@
     transform: scale(1);
   }
 }
-/* ── PROJECT CARD SLIDE-IN ANIMATIONS ───────────────────────────────── */
 
-/* Base transition on every card */
-.project-card {
-  opacity: 0;
-  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
 }
+
+
+/* ── MODAL TYPOGRAPHY ───────────────────────────────────────────────── */
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.modal-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.modal-content p + p {
+  margin-top: 0.75rem;
+}
+
+
+/* ── MODAL GALLERY ──────────────────────────────────────────────────── */
+
+.modal-gallery {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Gallery images – clean grid, consistent shape */
+.modal-gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;   /* change to 'contain' if you never want cropping */
+  border-radius: 6px;
+}
+
+/* On small screens, reduce padding a bit */
+@media (max-width: 600px) {
+  .project-modal {
+    padding: 1.5rem 1rem;
+  }
+
+  .modal-content {
+    padding: 1.25rem 1rem;
+  }
+}
+
+
+/* ── PROJECT CARD SLIDE-IN ANIMATIONS ───────────────────────────────── */
 
 /* Initial off-screen positions per card */
 .project-item:nth-child(1) .project-card { transform: translateX(-50px); }
@@ -151,7 +234,7 @@
 .project-item:nth-child(8) .project-card { transform: translateX(-50px); }
 .project-item:nth-child(9) .project-card { transform: translateX(-50px); }
 
-/* When .projects-section has .visible, slide them into place */
+/* When .projects-section gets .visible, slide them into place */
 .projects-section.visible .project-item:nth-child(1) .project-card {
   opacity: 1;
   transform: translateX(0);
@@ -170,7 +253,7 @@
 .projects-section.visible .project-item:nth-child(4) .project-card {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 1s;
+  transition-delay: 1.0s;
 }
 .projects-section.visible .project-item:nth-child(5) .project-card {
   opacity: 1;
@@ -179,7 +262,7 @@
 }
 .projects-section.visible .project-item:nth-child(6) .project-card {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
   transition-delay: 1.4s;
 }
 .projects-section.visible .project-item:nth-child(7) .project-card {
@@ -198,33 +281,3 @@
   transition-delay: 2.0s;
 }
 
-
-.project-modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  z-index: 2000;
-  overflow-y: auto;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 900px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.modal-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}

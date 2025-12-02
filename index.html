@@ -6,10 +6,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
-  <title>Rick website</title>
+  <title>Rick Unite</title>
   <link rel="stylesheet" href="body.css" />
   <link rel="stylesheet" href="resume.css" />
   <link rel="stylesheet" href="project.css" />
+  <link rel="stylesheet" href="project-slideshow.css" />  
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -24,7 +25,7 @@
   </div>
 
 <!-- NAME APPEARS IN CENTER -->
-  <div class="hero-text">"Engineering Creativity into Reality"</div>
+  <div class="hero-text">welcome</div>
 
 
   <!-- 2) NAVBAR (fixed on scroll) -->
@@ -45,16 +46,16 @@
     <ul class="social-menu">
       <!-- new Resume link: -->
       <li><a href="#" class="resume-icon" rel="noopener">
-        <img src="Pictures/resume-white.png" alt="Resume" class="icon">
+        <img src="Pictures/widgets/resume-white.png" alt="Resume" class="icon">
       </a></li>
       <li><a href="https://instagram.com/_sic.rick_" target="_blank" rel="noopener">
-        <img src="Pictures/instagram-white.png" alt ="Instagram" class="icon">
+        <img src="Pictures/widgets/instagram-white.png" alt ="Instagram" class="icon">
       </a></li>
       <li><a href="https://github.com/ryghoul" target="_blank" rel="noopener">
-        <img src="Pictures/github-white.png" alt="GitHub" class="icon">
+        <img src="Pictures/widgets/github-white.png" alt="GitHub" class="icon">
       </a></li>
       <li><a href="https://www.linkedin.com/in/rick-jeiden-unite-505157187/" target="_blank" rel="noopener">
-        <img src="Pictures/linkedin-white.png" alt="LinkedIn" class="icon">
+        <img src="Pictures/widgets/linkedin-white.png" alt="LinkedIn" class="icon">
       </a></li>
     </ul>
     </nav>
@@ -120,7 +121,7 @@
     <!-- ABOUT SECTION -->
     <section id="about" class="about-section">
       <div class="about-container">
-        <img src="Pictures/about.jpg" alt="About Rick Unite" class="about-img">
+        <img src="Pictures/about/about.jpg" alt="About Rick Unite" class="about-img">
         <div class="about-text">
           <h2>about me</h2>
       <p>I’m a 21-year-old Filipino-American from Carson, California, and a fourth-year Electrical Computer Engineering major at Cal Poly Pomona. I thrive at the intersection of theory and hands-on innovation, channeling my love of circuitry and code into creative projects that let me bring ideas to life. When I’m not designing or debugging, you’ll find me watching movies for inspiration, expressing myself through dance, or dreaming up my next build.</p>
@@ -132,7 +133,7 @@
     <section id="education" class="education-section">
 <div class="education-container">
   <div class="education-img-wrapper">
-    <img src="Pictures/cpp.png" alt="Cal Poly Pomona Logo" class="education-img" />
+    <img src="Pictures/education/cpp.png" alt="Cal Poly Pomona Logo" class="education-img" />
   </div>
   <div class="education-text">
     <h2>education</h2>
@@ -147,10 +148,10 @@
 <section id="work" class="work-section">
   <div class="work-container">
     <div class="work-images">
-      <img src="Pictures/work1.jpg" alt="Work image 1" class="work-img">
-      <img src="Pictures/work2.png" alt="Work image 2" class="work-img">
-      <img src="Pictures/work3.png" alt="Work image 3" class="work-img">
-      <img src="Pictures/work4.png" alt="Work image 4" class="work-img">
+      <img src="Pictures/work/work1.jpg" alt="Work image 1" class="work-img">
+      <img src="Pictures/work/work2.png" alt="Work image 2" class="work-img">
+      <img src="Pictures/work/work3.png" alt="Work image 3" class="work-img">
+      <img src="Pictures/work/work4.png" alt="Work image 4" class="work-img">
     </div>
     <div class="work-text">
       <h2>work</h2>
@@ -165,10 +166,11 @@
   <h2>projects</h2>
   <div class="projects-container">
 
+    <!-- Project #1 -->
     <!-- wrap a card + its modal in one item -->
     <div class="project-item">
       <div class="project-card" data-modal-id="modal1">
-        <img src="Pictures/project1.jpg" class="project-img" alt="…">
+        <img src="Pictures/projects/p1/project1.jpg" class="project-img" alt="…">
         <div class="project-info">
           <h3>Disney Imagineer Competition</h3>
           <p>Lead on Disney Imagineer Competition 2024</p>
@@ -181,14 +183,35 @@
           <button class="modal-close">&times;</button>
           <h3>Disney Imagineer Competition</h3>
           <p>Participated in a Disney Imagineer Competition. I participated with my friends Joseph Kim and Claire Ku. We designed a company called LAPS. The purpose of the app was to better the structure of the public transport system within LA! We would have various hubs that would connect to a main hub. Shuttles were used to connect these hubs to conduct easier transport within the busy city and reduce traffic. This would lead to less carbon emission within our atmosphere and overall a more happier, public transport efficient city. I was in charge of the 3D model design of the trains and the app configuration, Claire created all the drawings of where our hubs would be and found their proper locations in correlation with an IRL map, and Joe created our project proposal/story.</p>
-          <div class="modal-gallery">
-            <img src="Pictures/project1-6.png" alt="">
-            <img src="Pictures/project1-3.png" alt="">
-            <img src="Pictures/project1-4.png" alt="">
-            <img src="Pictures/project1-5.png" alt="">
-            <img src="Pictures/project1-7.jpg" alt="">
-            <img src="Pictures/project1-8.jpg" alt="">
-          </div>
+
+          <div class="slideshow" data-slides>
+  <div class="slide active">
+    <img src="Pictures/projects/p1/project1-1.png" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p1/project1-2.png" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p1/project1-3.png" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p1/project1-4.png" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p1/project1-5.png" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p1/project1-6.jpg" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p1/project1-7.jpg" alt="">
+  </div>
+
+  <!-- arrows -->
+  <button class="slide-btn prev" data-prev>&#10094;</button>
+  <button class="slide-btn next" data-next>&#10095;</button>
+</div>
+
         </div>
       </div>
     </div>
@@ -196,7 +219,7 @@
   <!-- Project #2 -->
   <div class="project-item">
     <div class="project-card" data-modal-id="modal2">
-      <img src="Pictures/project2.jpg" class="project-img" alt="…">
+      <img src="Pictures/projects/p2/fpga.jpg" class="project-img" alt="…">
       <div class="project-info">
         <h3>FPGA Doodle Jump</h3>
         <p>Created Doodle Jump on a Nexus A7 100T</p>
@@ -209,10 +232,20 @@
         <button class="modal-close">&times;</button>
         <h3>FPGA Doodle Jump</h3>
         <p>Leveraging a Digilent Nexys A7-100T FPGA, I implemented the classic Doodle Jump game entirely in Verilog. I designed a VGA controller to generate 640×480 @ 60 Hz timing and double-buffered sprite rendering for the jumper and moving platforms, and built a hardware physics engine to model gravity, jump dynamics, and collision detection. User input is mapped to push-buttons with dead-zone filtering to ensure smooth left/right movement, while a pseudo-random platform generator based on an LFSR keeps gameplay unpredictable. Onboard clock management divides the 100 MHz system clock into a 25 MHz pixel clock for VGA timing and slower clocks for game logic, and I added simple audio feedback via the onboard speaker for scoring events. This project showcases my expertise in synchronous digital design, finite-state machines, timing-critical interfaces, and resource-efficient hardware implementation.</p>
-        <div class="modal-gallery">
-          <img src="Pictures/project1-1.png" alt="">
-          <img src="Pictures/project1-2.png" alt="">
-        </div>
+
+        <div class="slideshow" data-slides>
+  <div class="slide active">
+    <img src="Pictures/projects/p2/fpga.jpg" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p2/" alt="">
+  </div>
+
+  <!-- arrows -->
+  <button class="slide-btn prev" data-prev>&#10094;</button>
+  <button class="slide-btn next" data-next>&#10095;</button>
+</div>
+
       </div>
     </div>
   </div>
@@ -220,7 +253,7 @@
   <!-- Project #3 -->
   <div class="project-item">
     <div class="project-card" data-modal-id="modal3">
-      <img src="Pictures/project3.jpg" class="project-img" alt="…">
+      <img src="Pictures/projects/p3/pc.jpg" class="project-img" alt="…">
       <div class="project-info">
         <h3>Computer Builds</h3>
         <p>I build computers :)</p>
@@ -235,11 +268,23 @@
         <p>Here is my personal computer that I built! This is the 3rd computer I’ve built. I have gotten used to the process by now. I’m running a dual boot using GRUB to use Arch Linux and Windows!</p>
         <p>Specs: Ryzen 9 7900X, RTX 3070 Suprim, 32GB DDR5 TForce RAM, EVGA 1000W PSU, 1TB M.2. SSD, 8 TB HDD.</p>
         <p>I built multiple other PCs as well.</p>
-        <div class="modal-gallery">
-          <img src="Pictures/project3.jpg" alt="">
-          <img src="Pictures/pc2.jpg" alt="">
-          <img src="Pictures/pc3.jpg" alt="">
-        </div>
+
+  <div class="slideshow" data-slides>
+  <div class="slide active">
+    <img src="Pictures/projects/p3/pc.jpg" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p3/pc2.jpg" alt="">
+  </div>
+    <div class="slide">
+    <img src="Pictures/projects/p3/pc3.jpg" alt="">
+  </div>
+
+  <!-- arrows -->
+  <button class="slide-btn prev" data-prev>&#10094;</button>
+  <button class="slide-btn next" data-next>&#10095;</button>
+</div>
+
       </div>
     </div>
   </div>
@@ -247,7 +292,7 @@
   <!-- Project #4 -->
   <div class="project-item">
     <div class="project-card" data-modal-id="modal4">
-      <img src="Pictures/stoplight.jpg" class="project-img" alt="…">
+      <img src="Pictures/projects/p4/stoplight.jpg" class="project-img" alt="…">
       <div class="project-info">
         <h3>Microcontrollers Stoplight</h3>
         <p>Created on a PIC18F4620 using MPLABX</p>
@@ -260,9 +305,18 @@
         <button class="modal-close">&times;</button>
         <h3>Microcontrollers Stoplight</h3>
         <p>Using the Microchip PIC18F4620 and MPLAB X IDE, I built a fully autonomous stoplight simulator in C. I mapped the red, yellow, and green LEDs to digital output pins and configured the PIC’s oscillator and configuration bits for an 8 MHz system clock. A hardware timer (Timer0) with interrupt-driven overflow provided precise millisecond timing, driving a finite‐state machine that cycles through red, green, and yellow phases with configurable durations. I also implemented a debounced push-button input for a pedestrian‐crossing request, which temporarily inserted a walk signal into the sequence. Throughout the project, I used MPLAB X’s simulator and on-chip debugger to verify timing, validate state transitions, and optimize code size and performance—demonstrating hands-on expertise in microcontroller configuration, interrupt handling, and embedded systems design.</p>
-        <div class="modal-gallery">
-          <img src="Pictures/stoplight.jpg" alt="">
-        </div>
+ 
+        
+  <div class="slideshow" data-slides>
+  <div class="slide active">
+    <img src="Pictures/projects/p4/stoplight.jpg" alt="">
+  </div>
+
+  <!-- arrows -->
+  <button class="slide-btn prev" data-prev>&#10094;</button>
+  <button class="slide-btn next" data-next>&#10095;</button>
+</div>
+
       </div>
     </div>
   </div>
@@ -270,7 +324,7 @@
     <!-- Project #5 -->
   <div class="project-item">
     <div class="project-card" data-modal-id="modal5">
-      <img src="Pictures/mm.jpg" class="project-img" alt="…">
+      <img src="Pictures/projects/p5/mm.jpg" class="project-img" alt="…">
       <div class="project-info">
         <h3>MagicMirror Smart Mirror</h3>
         <p>Built a Smart Mirror from scratch using a Raspberry Pi</p>
@@ -283,14 +337,32 @@
         <button class="modal-close">&times;</button>
         <h3>MagicMirror Smart</h3>
         <p>I built a fully custom smart mirror using the open-source MagicMirror² framework hosted on GitHub and powered by a Raspberry Pi. On the software side, I cloned the MagicMirror² repo, installed it on Raspbian, and customized modules to display time, weather, calendar events, and headline news. For the hardware, I hand-crafted a wooden frame from raw planks I cut and sanded myself, and fitted a sheet of two-way mirror glass into it. I then stripped down an old monitor to its bare LCD panel and mounted it directly behind the glass, connecting it to the Pi. The result is a seamless, wall-mounted smart mirror that combines embedded Linux, hardware hacking, carpentry, and open-source software customization into a polished, functional installation.</p>
-        <div class="modal-gallery">
-          <img src="Pictures/mm.jpg" alt="">
-          <img src="Pictures/mm2.jpg" alt="">
-          <img src="Pictures/mm3.jpg" alt="">
-          <img src="Pictures/mm4.jpg" alt="">
-          <img src="Pictures/mm5.jpg" alt="">
-          <img src="Pictures/mm6.jpg" alt="">
-        </div>
+
+          <div class="slideshow" data-slides>
+  <div class="slide active">
+    <img src="Pictures/projects/p5/mm.jpg" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p5/mm2.jpg" alt="">
+  </div>
+    <div class="slide">
+    <img src="Pictures/projects/p5/mm3.jpg" alt="">
+  </div>
+   <div class="slide">
+    <img src="Pictures/projects/p5/mm4.jpg" alt="">
+  </div>
+   <div class="slide">
+    <img src="Pictures/projects/p5/mm5.jpg" alt="">
+  </div>
+   <div class="slide">
+    <img src="Pictures/projects/p5/mm6.jpg" alt="">
+  </div>
+
+   <!-- arrows -->
+  <button class="slide-btn prev" data-prev>&#10094;</button>
+  <button class="slide-btn next" data-next>&#10095;</button>
+</div>
+
       </div>
     </div>
   </div>
@@ -298,23 +370,48 @@
   <!-- Project #6 -->
   <div class="project-item">
     <div class="project-card" data-modal-id="modal6">
-      <img src="Pictures/train.png" class="project-img" alt="…">
+      <img src="Pictures/projects/p6/harness.jpg" class="project-img" alt="…">
       <div class="project-info">
-        <h3>Iris Chatbot</h3>
-        <p>Brief description…</p>
-      </div>
+        <h3>Cat Heart Rate Monitor Harness</h3>
+        <p>Designed a custom heart-rate monitor harness for my cat using an ESP32 and a MEMS microphone.</p>
+        </div>
     </div>
 
     <!-- now outside the card -->
     <div id="modal6" class="project-modal">
       <div class="modal-content">
         <button class="modal-close">&times;</button>
-        <h3>Iris Chatbot</h3>
-        <p>Here’s a deeper dive…</p>
-        <div class="modal-gallery">
-          <img src="Pictures/project1-1.png" alt="">
-          <img src="Pictures/project1-2.png" alt="">
-        </div>
+        <h3>Cat Heart Rate Monitor Harness</h3>
+        <p>Developed a microcontroller-based cat heart-rate monitoring harness using an ESP32, INMP441 MEMS microphone, real-time FFT filtering, and ESP-NOW wireless communication. The receiver unit renders a live ECG-style waveform on a TFT display, enabling continuous, low-power feline vital tracking. </p>
+      <a href="https://youtu.be/k_jUajfXWR4" target="_blank" class="project-link-btn"> Watch on YouTube ↗ </a>
+
+
+
+                  <div class="slideshow" data-slides>
+  <div class="slide active">
+    <img src="Pictures/projects/p6/harness.jpg" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p6/harness2.jpg" alt="">
+  </div>
+    <div class="slide">
+    <img src="Pictures/projects/p6/tato.jpg" alt="">
+  </div>
+   <div class="slide">
+    <img src="Pictures/projects/p6/esp32-2.jpg" alt="">
+  </div>
+   <div class="slide">
+    <img src="Pictures/projects/p6/mems microphone.jpg" alt="">
+  </div>
+   <div class="slide">
+    <img src="Pictures/projects/p6/tft display.jpg" alt="">
+  </div>
+
+   <!-- arrows -->
+  <button class="slide-btn prev" data-prev>&#10094;</button>
+  <button class="slide-btn next" data-next>&#10095;</button>
+</div>
+
       </div>
     </div>
   </div>
@@ -322,7 +419,7 @@
      <!-- Project #7 -->
   <div class="project-item">
     <div class="project-card" data-modal-id="modal7">
-      <img src="Pictures/cafesumire.png" class="project-img" alt="…">
+      <img src="Pictures/projects/p7/cafesumire.png" class="project-img" alt="…">
       <div class="project-info">
         <h3>Cafe Sumire</h3>
         <p>Built a Cafe Website HTML/CSS/JS</p>
@@ -335,10 +432,17 @@
         <button class="modal-close">&times;</button>
         <h3>Cafe Sumire Website</h3>
         <p>I designed and built a bespoke, responsive website for Café Sumire—TJ Ige and Nera Castro’s specialty coffee shop—using HTML5, CSS3 and vanilla JavaScript. The site opens with a full-screen video hero overlaid by the café’s tagline in a stylish serif font, and a fixed navbar that smoothly transitions from transparent to solid as you scroll. I crafted a custom color palette of sea green, ivory, charcoal gray, and royal blue accents, and leveraged CSS Grid and Flexbox to showcase the menu: each signature drink appears in a card layout with click-to-open modals for ingredients and tasting notes. An About section tells TJ and Nera’s story with professional photography, while the Contact page features a custom form (powered by Email.js) and an embedded Google Map for easy directions. Mobile-first breakpoints ensure the site looks great on phones, tablets, and desktops alike, and I organized the CSS into modular components for easy future updates. The result is a polished, brand-aligned web presence that highlights Café Sumire’s atmosphere and makes it effortless for customers to explore the menu and get in touch.</p>
-        <div class="modal-gallery">
-          <img src="Pictures/project1-1.png" alt="">
-          <img src="Pictures/project1-2.png" alt="">
-        </div>
+
+        <div class="slideshow" data-slides>
+  <div class="slide active">
+    <img src="Pictures/projects/p7/cafesumire.png" alt="">
+  </div>
+
+   <!-- arrows -->
+  <button class="slide-btn prev" data-prev>&#10094;</button>
+  <button class="slide-btn next" data-next>&#10095;</button>
+</div>
+
       </div>
     </div>
   </div>
@@ -346,7 +450,7 @@
  <!-- Project #8 -->
   <div class="project-item">
     <div class="project-card" data-modal-id="modal8">
-      <img src="ticket/cashier2.png" class="project-img" alt="…">
+      <img src="Pictures/projects/p8/barista1.png" class="project-img" alt="…">
       <div class="project-info">
         <h3>Cafe Sumire Ticketing System</h3>
         <p>Developed a full-stack ticketing system</p>
@@ -359,14 +463,32 @@
         <button class="modal-close">&times;</button>
         <h3>Cafe Sumire Ticketing System</h3>
         <p>I developed a full-stack ticketing platform for Café Sumire using Node.js on the backend, Docker containers for consistent environments, and Render.com for seamless cloud deployment. The system exposes a RESTful API for creating, updating, and tracking customer tickets, while a responsive HTML/CSS/JavaScript frontend gives café staff an intuitive interface to manage orders in real time. I orchestrated services with Docker Compose, configured network routing and secure HTTPS endpoints, and tuned firewall rules to ensure reliable, secure communication between microservices and the web client. This solution streamlined the café’s order workflow, reduced service bottlenecks, and highlights my expertise in backend and frontend development, containerization, cloud deployment, and network configuration. The website is located at https://cafe-sumire-ticketing.onrender.com/barista.html </p>
-        <div class="modal-gallery">
-          <img src="ticket/cashier1.png" alt="">
-          <img src="ticket/cashier2.png" alt="">
-          <img src="ticket/cashier3.png" alt="">
-          <img src="ticket/cashier4.png" alt="">
-          <img src="ticket/barista1.png" alt="">
-          <img src="ticket/barista2.png" alt="">
-        </div>
+
+                 <div class="slideshow" data-slides>
+  <div class="slide active">
+    <img src="Pictures/projects/p8/barista1.png" alt="">
+  </div>
+  <div class="slide">
+    <img src="Pictures/projects/p8/barista2.png" alt="">
+  </div>
+    <div class="slide">
+    <img src="Pictures/projects/p8/cashier1.png" alt="">
+  </div>
+   <div class="slide">
+    <img src="Pictures/projects/p8/cashier2.png" alt="">
+  </div>
+   <div class="slide">
+    <img src="Pictures/projects/p8/cashier3.png" alt="">
+  </div>
+     <div class="slide">
+    <img src="Pictures/projects/p8/cashier4.png" alt="">
+  </div>
+
+   <!-- arrows -->
+  <button class="slide-btn prev" data-prev>&#10094;</button>
+  <button class="slide-btn next" data-next>&#10095;</button>
+</div>
+
       </div>
     </div>
   </div>
@@ -374,7 +496,7 @@
    <!-- Project #9 -->
   <div class="project-item">
     <div class="project-card" data-modal-id="modal9">
-      <img src="Pictures/ako.png" class="project-img" alt="…">
+      <img src="Pictures/projects/p9/ako.png" class="project-img" alt="…">
       <div class="project-info">
         <h3>AKO by Lee Webite</h3>
         <p>Built a Cafe Website HTML/CSS/JS</p>
@@ -387,10 +509,20 @@
         <button class="modal-close">&times;</button>
         <h3>AKO by Lee Website</h3>
         <p>I built AKO by Lee, a responsive website for Lee Calabia’s community-driven beverage and merch brand, using HTML5, CSS3, and vanilla JavaScript. The landing page welcomes visitors with bold imagery and Lee’s signature tagline, then guides them to a menu page showcasing handcrafted drink offerings in a clean, card-based layout. The lounge page creates a virtual gathering space—complete with interactive recipe reveal panels—so fans can explore Lee’s favorite concoctions step by step. Finally, the shopping page presents branded apparel and accessories with hover-activated details and a simple, JavaScript-powered cart for smooth order placement. Built with CSS Grid and Flexbox for flawless cross-device layouts, and enhanced with keyboard-friendly navigation and ARIA attributes, the site reflects Lee’s mission to unite the dance community over great drinks and authentic merch.</p>
-        <div class="modal-gallery">
-          <img src="Pictures/project1-1.png" alt="">
-          <img src="Pictures/project1-2.png" alt="">
-        </div>
+        <a href="https://akobylee.xyz" target="_blank" class="project-link-btn">
+  Visit Website ↗
+</a>
+
+                 <div class="slideshow" data-slides>
+  <div class="slide active">
+    <img src="Pictures/projects/p9/ako.png" alt="">
+  </div>
+
+   <!-- arrows -->
+  <button class="slide-btn prev" data-prev>&#10094;</button>
+  <button class="slide-btn next" data-next>&#10095;</button>
+</div>
+
       </div>
     </div>
   </div>
@@ -426,16 +558,16 @@
       <ul class="footer-social">
         
         <li><a href="javascript:void(0)" class="resume-icon" rel="noopener">
-        <img src="Pictures/resume-white.png" alt="Resume" class="icon">
+        <img src="Pictures/widgets/resume-white.png" alt="Resume" class="icon">
       </a></li>
       <li><a href="https://instagram.com/_sic.rick_" target="_blank" rel="noopener">
-        <img src="Pictures/instagram-white.png" alt ="Instagram" class="icon">
+        <img src="Pictures/widgets/instagram-white.png" alt ="Instagram" class="icon">
       </a></li>
       <li><a href="https://github.com/ryghoul" target="_blank" rel="noopener">
-        <img src="Pictures/github-white.png" alt="GitHub" class="icon">
+        <img src="Pictures/widgets/github-white.png" alt="GitHub" class="icon">
       </a></li>
       <li><a href="https://www.linkedin.com/in/rick-jeiden-unite-505157187/" target="_blank" rel="noopener">
-        <img src="Pictures/linkedin-white.png" alt="LinkedIn" class="icon">
+        <img src="Pictures/widgets/linkedin-white.png" alt="LinkedIn" class="icon">
       </a></li>
       </ul>
     </div>
@@ -450,5 +582,7 @@
 
   
   <script src="script.js"></script>
+  <script src="slideshow.js"></script>
+
 </body>
 </html>
