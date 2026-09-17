@@ -1,26 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="gate-locked">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-
   <title>Rick Unite</title>
   <link rel="stylesheet" href="body.css" />
   <link rel="stylesheet" href="resume.css" />
   <link rel="stylesheet" href="project.css" />
-  <link rel="stylesheet" href="project-slideshow.css" />  
+  <link rel="stylesheet" href="project-slideshow.css" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="landing.css" />
+  <noscript>
+    <style>
+      #landing-gate { display: none !important; }
+      html { overflow: auto !important; height: auto !important; }
+    </style>
+  </noscript>
 </head>
 <body>
 
-  <!-- 1) VIDEO HERO AT TOP -->
+  <!-- 0) LANDING GATE (intro screen, blocks scroll until entered) -->
+  <div id="landing-gate" class="landing-gate">
+    <div class="landing-bg">
+      <div class="landing-slide active" style="background-image: url('Pictures/landing/1.jpg');"></div>
+      <div class="landing-slide" style="background-image: url('Pictures/landing/2.jpg');"></div>
+      <div class="landing-slide" style="background-image: url('Pictures/landing/3.jpg');"></div>
+      <div class="landing-slide" style="background-image: url('Pictures/landing/4.jpg');"></div>
+      <div class="landing-slide" style="background-image: url('Pictures/landing/6.jpg');"></div>
+    </div>
+    <div class="landing-grain"></div>
+    <div class="landing-vignette"></div>
+    <div class="landing-content">
+      <button id="enter-site-btn" class="enter-btn" type="button">
+        <span class="enter-btn-text">ENTER MY SITE</span>
+        <span class="enter-btn-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 1) HERO SLIDESHOW AT TOP -->
   <div id="home" class="video-wrapper">
-    <video autoplay muted loop playsinline id="background-video">
-      <source src="Pictures/background-video.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <div class="hero-slideshow" id="hero-slideshow">
+      <div class="hero-slide active" style="background-image: url('Pictures/landing/1.jpg');"></div>
+      <div class="hero-slide" style="background-image: url('Pictures/landing/2.jpg');"></div>
+      <div class="hero-slide" style="background-image: url('Pictures/landing/3.jpg');"></div>
+      <div class="hero-slide" style="background-image: url('Pictures/landing/4.jpg');"></div>
+      <div class="hero-slide" style="background-image: url('Pictures/landing/6.jpg');"></div>
+    </div>
     <div class="video-overlay"></div>
   </div>
 
@@ -45,7 +72,7 @@
     <!-- social icons -->
     <ul class="social-menu">
       <!-- new Resume link: -->
-      <li><a href="#" class="resume-icon" rel="noopener">
+      <li><a href="Resume/Resume_Rick_Unite_ECE_2026.pdf" class="resume-icon" rel="noopener">
         <img src="Pictures/widgets/resume-white.png" alt="Resume" class="icon">
       </a></li>
       <li><a href="https://instagram.com/_sic.rick_" target="_blank" rel="noopener">
@@ -61,6 +88,42 @@
     </nav>
   </header>
 
+  <!-- Mobile nav toggle (hamburger) -->
+  <button id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+  </button>
+
+  <!-- Mobile slide-out menu -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside id="mobile-menu" class="sidebar-menu" aria-hidden="true">
+    <button id="sidebar-close" class="sidebar-close" aria-label="Close menu">&times;</button>
+    <nav class="sidebar-nav">
+      <ul class="sidebar-links">
+        <li><a href="#home">home</a></li>
+        <li><a href="#about">about</a></li>
+        <li><a href="#education">education</a></li>
+        <li><a href="#work">work</a></li>
+        <li><a href="#projects">projects</a></li>
+      </ul>
+      <ul class="sidebar-social">
+        <li><a href="Resume/Resume_Rick_Unite_ECE_2026.pdf" class="resume-icon" rel="noopener">
+          <img src="Pictures/widgets/resume-white.png" alt="Resume" class="icon">
+        </a></li>
+        <li><a href="https://instagram.com/_sic.rick_" target="_blank" rel="noopener">
+          <img src="Pictures/widgets/instagram-white.png" alt="Instagram" class="icon">
+        </a></li>
+        <li><a href="https://github.com/ryghoul" target="_blank" rel="noopener">
+          <img src="Pictures/widgets/github-white.png" alt="GitHub" class="icon">
+        </a></li>
+        <li><a href="https://www.linkedin.com/in/rick-jeiden-unite-505157187/" target="_blank" rel="noopener">
+          <img src="Pictures/widgets/linkedin-white.png" alt="LinkedIn" class="icon">
+        </a></li>
+      </ul>
+    </nav>
+  </aside>
+
   <!-- Resume Modal -->
 <!-- Resume Modal -->
 <div id="resume-modal" class="resume-modal" aria-hidden="true">
@@ -68,18 +131,10 @@
     <button class="resume-modal-close" aria-label="Close resume viewer">&times;</button>
 
     <header class="resume-modal-header">
-      <h2>Resumes</h2>
-      <p>View and download my latest resumes.</p>
+      <h2>Resume</h2>
+      <p>Preview or download my resume.</p>
     </header>
 
-    <div class="resume-accordion">
-
-      <!-- ECE Resume -->
-<div class="resume-item">
-  <button class="resume-toggle">
-    <span>ECE Resume</span>
-  </button>
-  <div class="resume-content">
     <div class="resume-viewer">
       <div class="resume-viewer-toolbar">
         <div class="resume-viewer-title">
@@ -88,36 +143,28 @@
         </div>
 
         <div class="resume-viewer-actions">
+          <a href="Resume/Resume_Rick_Unite_ECE_2026.pdf"
+             target="_blank"
+             class="viewer-btn">
+            Open PDF
+          </a>
 
-  <!-- Open PDF -->
-  <a href="Resume/Rick_Unite_ECE_Resume.pdf"
-     target="_blank"
-     class="viewer-btn">
-    Open PDF
-  </a>
-
-  <!-- Download DOCX -->
-  <a href="Resume/Rick_Unite_ECE_Resume.docx"
-     class="viewer-btn"
-     download>
-    Download DOCX
-  </a>
-
-</div>
+          <a href="Resume/Resume_Rick_Unite_ECE_2026.pdf"
+             class="viewer-btn"
+             download>
+            Download PDF
+          </a>
+        </div>
       </div>
 
       <div class="resume-viewer-body">
         <iframe
           class="resume-pdf-frame"
-          src="Resume/Rick_Unite_ECE_Resume.pdf#toolbar=0&navpanes=0"
+          src="Resume/Resume_Rick_Unite_ECE_2026.pdf"
+          scrolling="yes"
           title="Rick Unite ECE Resume PDF">
         </iframe>
       </div>
-    </div>
-  </div>
-</div>
-
-
     </div>
   </div>
 </div>
@@ -130,10 +177,17 @@
     <!-- ABOUT SECTION -->
     <section id="about" class="about-section">
       <div class="about-container">
-        <img src="Pictures/about/about.jpg" alt="About Rick Unite" class="about-img">
+        <div class="about-img about-carousel">
+          <div class="about-carousel-track">
+            <img src="Pictures/about/about.jpg" alt="Rick Unite photo 1">
+            <img src="Pictures/about/about2.jpg" alt="Rick Unite photo 2">
+            <img src="Pictures/about/about3.jpg" alt="Rick Unite photo 3">
+            <img src="Pictures/about/about.jpg" alt="" aria-hidden="true">
+          </div>
+        </div>
         <div class="about-text">
           <h2>about me</h2>
-      <p>I’m a 21-year-old Filipino-American from Carson, California, and a fourth-year Electrical Computer Engineering major at Cal Poly Pomona. I thrive at the intersection of theory and hands-on innovation, channeling my love of circuitry and code into creative projects that let me bring ideas to life. When I’m not designing or debugging, you’ll find me watching movies for inspiration, expressing myself through dance, or dreaming up my next build.</p>
+      <p>I’m a 22-year-old Filipino-American from Carson, California, and a Electrical Computer Engineering graduate from Cal Poly Pomona. I thrive at the intersection of theory and hands-on innovation, channeling my love of circuitry and code into creative projects that let me bring ideas to life. When I’m not designing or debugging, you’ll find me watching movies for inspiration, expressing myself through dance, or dreaming up my next build.</p>
         </div>
       </div>
     </section>
@@ -147,7 +201,7 @@
   <div class="education-text">
     <h2>education</h2>
     <p>
-      I attended Cal Poly Pomona studying my Bachelor’s in Electrical Computer Engineering. I chose ECE because I was drawn to both computer science software and electrical hardware. I’ve taken courses like Digital Verilog Design, Control Systems Engineering, and Electrical Circuit Analysis. My favorite was Microelectronics, which covered diodes, transistors, and BJTs.
+      I attended Cal Poly Pomona studying my Bachelor’s in Electrical Computer Engineering. I chose ECE because I was drawn to both computer science software and electrical hardware. During my time in college, I participated in clubs like the Northrup Grumman Collaboration Project and building a weather station using sensor-fusion and an ESP32 for our Search & Rescue drone. In my Bio-Medical class I built a non-invasive heart rate sensor harness for my cat as well!
     </p>
   </div>
   </div>
@@ -161,11 +215,12 @@
       <img src="Pictures/work/work2.png" alt="Work image 2" class="work-img">
       <img src="Pictures/work/work3.png" alt="Work image 3" class="work-img">
       <img src="Pictures/work/work4.png" alt="Work image 4" class="work-img">
+      <img src="Pictures/work/pyro-e.png" alt="Pyro-E logo" class="work-img">
     </div>
     <div class="work-text">
       <h2>work</h2>
-  <p>I’ve gained a diverse range of experiences across several industries. My career began in 2021 as a Summer Youth intern in the Operations Excellence Department at Marathon Petroleum. In 2023, I worked as a Baker’s Assistant at Uncle Tetsu, where I prepared Japanese cheesecakes and provided customer service. Later that year, I was rehired at Marathon as a Computer Systems Administrator, supporting internal systems and operations.</p>
-  <p>In 2024, I joined LMNL Dance Studio as a Video Editor, creating digital content to promote the studio’s events and programs. My most recent roles at LMNL and Marathon concluded in May 2025. Currently, I’m working as an IT Intern at Chint Power Systems, where I assist with system administration, technical troubleshooting, and network support.</p>
+      <p>My experience spans operations, systems administration, video production, and IT. Earlier roles at Marathon Petroleum, Uncle Tetsu, and LMNL Dance Studio helped me build a practical foundation in operations, technical support, and creative problem-solving.</p>
+      <p>At Chint Power Systems (CPS), I support system administration, troubleshooting, and network operations. At Pyro-E, I work as an Electrical Engineer Underwater Robotics Intern, developing the EEL-Drone’s autonomy system through sensor fusion, Ping360 sonar object detection, waypoint generation, and heading-based PID control.</p>
     </div>
   </div>
 </section>
@@ -173,17 +228,80 @@
   <!-- PROJECTS SECTION-->
 <section id="projects" class="projects-section">
   <h2>projects</h2>
-  <div class="projects-container">
+  <div class="projects-stack">
+
+    <!-- EEL-Drone Project -->
+    <div class="project-item">
+      <div class="project-row" data-modal-id="modal-eel-drone">
+        <span class="project-row-num">01</span>
+        <span class="project-img project-symbol project-symbol-eel-drone" aria-hidden="true">EEL</span>
+        <div class="project-info">
+          <h3>EEL-Drone Project</h3>
+          <p>Underwater drone autonomy and sensor fusion</p>
+        </div>
+        <span class="project-row-arrow" aria-hidden="true">&#8594;</span>
+      </div>
+      <div id="modal-eel-drone" class="project-modal">
+        <div class="modal-content">
+          <button class="modal-close" aria-label="Close EEL-Drone Project">&times;</button>
+          <h3>EEL-Drone Project</h3>
+          <p>I developed the core autonomy system for an underwater drone, focusing on sensor fusion, object detection using Ping360 sonar scans, and waypoint generation. I also implemented PID control based on heading to guide the drone’s navigation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NGCP Weather Station Project -->
+    <div class="project-item">
+      <div class="project-row" data-modal-id="modal-ngcp-weather">
+        <span class="project-row-num">02</span>
+        <span class="project-img project-symbol project-symbol-ngcp-weather" aria-hidden="true">NGCP</span>
+        <div class="project-info">
+          <h3>NGCP Weather Station Project</h3>
+          <p>ESP32 environmental monitoring for search and rescue</p>
+        </div>
+        <span class="project-row-arrow" aria-hidden="true">&#8594;</span>
+      </div>
+      <div id="modal-ngcp-weather" class="project-modal">
+        <div class="modal-content">
+          <button class="modal-close" aria-label="Close NGCP Weather Station Project">&times;</button>
+          <h3>NGCP Weather Station Project</h3>
+          <p>As part of the Ground Control Station team for the Northrop Grumman Collaboration Project, I designed and built an ESP32-based weather station to support environmental monitoring for our search and rescue UAV. I integrated light, temperature, humidity, wind speed, and wind direction sensors to collect and process real-time data. I also created the schematic in KiCad and ordered a custom PCB.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Morse Code Translator -->
+    <div class="project-item">
+      <div class="project-row" data-modal-id="modal-morse-code">
+        <span class="project-row-num">03</span>
+        <span class="project-img project-symbol project-symbol-morse-code" aria-hidden="true">&middot; &minus;</span>
+        <div class="project-info">
+          <h3>Morse Code Translator</h3>
+          <p>Mouse-controlled Morse code translation on a Nexys A7-100T</p>
+        </div>
+        <span class="project-row-arrow" aria-hidden="true">&#8594;</span>
+      </div>
+      <div id="modal-morse-code" class="project-modal">
+        <div class="modal-content">
+          <button class="modal-close" aria-label="Close Morse Code Translator">&times;</button>
+          <h3>Morse Code Translator</h3>
+          <p>For my Advanced Verilog class, we built a mouse-controlled Morse Code Translator on a Nexys A7-100T FPGA board. The interface included a Morse code reference chart. A short left mouse click entered a dot, while holding the left mouse button for at least 1.2 seconds entered a dash. The translator collected these inputs into a sequence and displayed the corresponding letter when the sequence matched a Morse code character. We could append letters to spell out words, then use a clear button to reset the displayed text when finished.</p>
+        </div>
+      </div>
+    </div>
+
 
     <!-- Project #1 -->
-    <!-- wrap a card + its modal in one item -->
+    <!-- wrap a row + its modal in one item -->
     <div class="project-item">
-      <div class="project-card" data-modal-id="modal1">
+      <div class="project-row" data-modal-id="modal1">
+        <span class="project-row-num">04</span>
         <img src="Pictures/projects/p1/project1.jpg" class="project-img" alt="…">
         <div class="project-info">
           <h3>Disney Imagineer Competition</h3>
           <p>Lead on Disney Imagineer Competition 2024</p>
         </div>
+        <span class="project-row-arrow" aria-hidden="true">→</span>
       </div>
 
       <!-- Project Main Info -->
@@ -227,12 +345,14 @@
 
   <!-- Project #2 -->
   <div class="project-item">
-    <div class="project-card" data-modal-id="modal2">
+    <div class="project-row" data-modal-id="modal2">
+      <span class="project-row-num">05</span>
       <img src="Pictures/projects/p2/fpga.jpg" class="project-img" alt="…">
       <div class="project-info">
         <h3>FPGA Doodle Jump</h3>
         <p>Created Doodle Jump on a Nexus A7 100T</p>
       </div>
+      <span class="project-row-arrow" aria-hidden="true">→</span>
     </div>
 
     <!-- Project Main Info -->
@@ -246,9 +366,6 @@
   <div class="slide active">
     <img src="Pictures/projects/p2/fpga.jpg" alt="">
   </div>
-  <div class="slide">
-    <img src="Pictures/projects/p2/" alt="">
-  </div>
 
   <!-- arrows -->
   <button class="slide-btn prev" data-prev>&#10094;</button>
@@ -261,12 +378,14 @@
 
   <!-- Project #3 -->
   <div class="project-item">
-    <div class="project-card" data-modal-id="modal3">
+    <div class="project-row" data-modal-id="modal3">
+      <span class="project-row-num">06</span>
       <img src="Pictures/projects/p3/pc.jpg" class="project-img" alt="…">
       <div class="project-info">
         <h3>Computer Builds</h3>
         <p>I build computers :)</p>
       </div>
+      <span class="project-row-arrow" aria-hidden="true">→</span>
     </div>
 
     <!-- Project Main Info -->
@@ -300,12 +419,14 @@
 
   <!-- Project #4 -->
   <div class="project-item">
-    <div class="project-card" data-modal-id="modal4">
+    <div class="project-row" data-modal-id="modal4">
+      <span class="project-row-num">07</span>
       <img src="Pictures/projects/p4/stoplight.jpg" class="project-img" alt="…">
       <div class="project-info">
         <h3>Microcontrollers Stoplight</h3>
         <p>Created on a PIC18F4620 using MPLABX</p>
       </div>
+      <span class="project-row-arrow" aria-hidden="true">→</span>
     </div>
 
     <!-- now outside the card -->
@@ -332,12 +453,14 @@
 
     <!-- Project #5 -->
   <div class="project-item">
-    <div class="project-card" data-modal-id="modal5">
+    <div class="project-row" data-modal-id="modal5">
+      <span class="project-row-num">08</span>
       <img src="Pictures/projects/p5/mm.jpg" class="project-img" alt="…">
       <div class="project-info">
         <h3>MagicMirror Smart Mirror</h3>
         <p>Built a Smart Mirror from scratch using a Raspberry Pi</p>
       </div>
+      <span class="project-row-arrow" aria-hidden="true">→</span>
     </div>
 
     <!-- now outside the card -->
@@ -378,12 +501,14 @@
 
   <!-- Project #6 -->
   <div class="project-item">
-    <div class="project-card" data-modal-id="modal6">
+    <div class="project-row" data-modal-id="modal6">
+      <span class="project-row-num">09</span>
       <img src="Pictures/projects/p6/harness.jpg" class="project-img" alt="…">
       <div class="project-info">
         <h3>Cat Heart Rate Monitor Harness</h3>
         <p>Designed a custom heart-rate monitor harness for my cat using an ESP32 and a MEMS microphone.</p>
         </div>
+      <span class="project-row-arrow" aria-hidden="true">→</span>
     </div>
 
     <!-- now outside the card -->
@@ -425,45 +550,16 @@
     </div>
   </div>
 
-     <!-- Project #7 -->
-  <div class="project-item">
-    <div class="project-card" data-modal-id="modal7">
-      <img src="Pictures/projects/p7/cafesumire.png" class="project-img" alt="…">
-      <div class="project-info">
-        <h3>Cafe Sumire</h3>
-        <p>Built a Cafe Website HTML/CSS/JS</p>
-      </div>
-    </div>
-
-    <!-- now outside the card -->
-    <div id="modal7" class="project-modal">
-      <div class="modal-content">
-        <button class="modal-close">&times;</button>
-        <h3>Cafe Sumire Website</h3>
-        <p>I designed and built a bespoke, responsive website for Café Sumire—TJ Ige and Nera Castro’s specialty coffee shop—using HTML5, CSS3 and vanilla JavaScript. The site opens with a full-screen video hero overlaid by the café’s tagline in a stylish serif font, and a fixed navbar that smoothly transitions from transparent to solid as you scroll. I crafted a custom color palette of sea green, ivory, charcoal gray, and royal blue accents, and leveraged CSS Grid and Flexbox to showcase the menu: each signature drink appears in a card layout with click-to-open modals for ingredients and tasting notes. An About section tells TJ and Nera’s story with professional photography, while the Contact page features a custom form (powered by Email.js) and an embedded Google Map for easy directions. Mobile-first breakpoints ensure the site looks great on phones, tablets, and desktops alike, and I organized the CSS into modular components for easy future updates. The result is a polished, brand-aligned web presence that highlights Café Sumire’s atmosphere and makes it effortless for customers to explore the menu and get in touch.</p>
-
-        <div class="slideshow" data-slides>
-  <div class="slide active">
-    <img src="Pictures/projects/p7/cafesumire.png" alt="">
-  </div>
-
-   <!-- arrows -->
-  <button class="slide-btn prev" data-prev>&#10094;</button>
-  <button class="slide-btn next" data-next>&#10095;</button>
-</div>
-
-      </div>
-    </div>
-  </div>
-
  <!-- Project #8 -->
   <div class="project-item">
-    <div class="project-card" data-modal-id="modal8">
+    <div class="project-row" data-modal-id="modal8">
+      <span class="project-row-num">10</span>
       <img src="Pictures/projects/p8/barista1.png" class="project-img" alt="…">
       <div class="project-info">
         <h3>Cafe Sumire Ticketing System</h3>
         <p>Developed a full-stack ticketing system</p>
       </div>
+      <span class="project-row-arrow" aria-hidden="true">→</span>
     </div>
 
     <!-- now outside the card -->
@@ -504,12 +600,14 @@
 
    <!-- Project #9 -->
   <div class="project-item">
-    <div class="project-card" data-modal-id="modal9">
+    <div class="project-row" data-modal-id="modal9">
+      <span class="project-row-num">11</span>
       <img src="Pictures/projects/p9/ako.png" class="project-img" alt="…">
       <div class="project-info">
         <h3>AKO by Lee Webite</h3>
         <p>Built a Cafe Website HTML/CSS/JS</p>
       </div>
+      <span class="project-row-arrow" aria-hidden="true">→</span>
     </div>
 
     <!-- now outside the card -->
@@ -554,11 +652,11 @@
     <!-- Contact info -->
     <div class="footer-section">
       <h4>Contact</h4>
-      <p>
-        📧 <a href="mailto:runite02@gmail.com">runite02@gmail.com</a><br>
-        📞 <a href="tel:+1234567890">(310) 503-1802</a><br>
-        📸 Instagram: <a href="https://instagram.com/_sic.rick_" target="_blank">@_sic.rick_</a>
-      </p>
+      <address class="footer-contact">
+        <a href="mailto:runite02@gmail.com">runite02@gmail.com</a>
+        <a href="tel:+13105031802">(310) 503-1802</a>
+        <a href="https://instagram.com/_sic.rick_" target="_blank" rel="noopener">@_sic.rick_ on Instagram</a>
+      </address>
     </div>
 
     <!-- Social links -->
@@ -566,16 +664,16 @@
       <h4>Follow Me</h4>
       <ul class="footer-social">
         
-        <li><a href="javascript:void(0)" class="resume-icon" rel="noopener">
+        <li><a href="Resume/Resume_Rick_Unite_ECE_2026.pdf" class="resume-icon" rel="noopener" aria-label="Resume" title="Resume">
         <img src="Pictures/widgets/resume-white.png" alt="Resume" class="icon">
       </a></li>
-      <li><a href="https://instagram.com/_sic.rick_" target="_blank" rel="noopener">
+      <li><a href="https://instagram.com/_sic.rick_" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
         <img src="Pictures/widgets/instagram-white.png" alt ="Instagram" class="icon">
       </a></li>
-      <li><a href="https://github.com/ryghoul" target="_blank" rel="noopener">
+      <li><a href="https://github.com/ryghoul" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
         <img src="Pictures/widgets/github-white.png" alt="GitHub" class="icon">
       </a></li>
-      <li><a href="https://www.linkedin.com/in/rick-jeiden-unite-505157187/" target="_blank" rel="noopener">
+      <li><a href="https://www.linkedin.com/in/rick-jeiden-unite-505157187/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
         <img src="Pictures/widgets/linkedin-white.png" alt="LinkedIn" class="icon">
       </a></li>
       </ul>
@@ -592,6 +690,7 @@
   
   <script src="script.js"></script>
   <script src="slideshow.js"></script>
+  <script src="landing.js"></script>
 
 </body>
 </html>

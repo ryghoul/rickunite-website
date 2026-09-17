@@ -15,13 +15,77 @@ document.addEventListener("DOMContentLoaded", () => {
     lastScrollY = currentScrollY;
   });
 
-  // === BACKGROUND VIDEO LOOP ===
-  const vid = document.getElementById('background-video');
-  if (vid) {
-    vid.addEventListener('ended', () => {
-      vid.currentTime = 0;
-      vid.play();
-    });
+  // === MOBILE NAV TOGGLE ===
+  const navToggle = document.getElementById('nav-toggle');
+  const sidebarMenu = document.getElementById('mobile-menu');
+  const sidebarOverlay = document.getElementById('sidebar-overlay');
+  const sidebarClose = document.getElementById('sidebar-close');
+  const htmlEl = document.documentElement;
+
+  const openMobileMenu = () => {
+    navToggle?.classList.add('open');
+    navToggle?.setAttribute('aria-expanded', 'true');
+    sidebarMenu?.classList.add('open');
+    sidebarMenu?.setAttribute('aria-hidden', 'false');
+    sidebarOverlay?.classList.add('open');
+    htmlEl.classList.add('mobile-menu-open');
+  };
+
+  const closeMobileMenu = () => {
+    navToggle?.classList.remove('open');
+    navToggle?.setAttribute('aria-expanded', 'false');
+    sidebarMenu?.classList.remove('open');
+    sidebarMenu?.setAttribute('aria-hidden', 'true');
+    sidebarOverlay?.classList.remove('open');
+    htmlEl.classList.remove('mobile-menu-open');
+  };
+
+  navToggle?.addEventListener('click', () => {
+    if (sidebarMenu?.classList.contains('open')) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  });
+
+  sidebarOverlay?.addEventListener('click', closeMobileMenu);
+  sidebarClose?.addEventListener('click', closeMobileMenu);
+
+  sidebarMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && sidebarMenu?.classList.contains('open')) {
+      closeMobileMenu();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 992 && sidebarMenu?.classList.contains('open')) {
+      closeMobileMenu();
+    }
+  });
+
+  // One clock keeps the landing and hero backgrounds in sync, even during entry.
+  const backgroundSlides = [
+    document.querySelectorAll('.landing-slide'),
+    document.querySelectorAll('#hero-slideshow .hero-slide')
+  ].filter(slides => slides.length);
+  if (backgroundSlides.length) {
+    let backgroundIndex = 0;
+    const showBackground = () => {
+      backgroundSlides.forEach(slides => {
+        slides.forEach((slide, index) => {
+          slide.classList.toggle('active', index === backgroundIndex % slides.length);
+        });
+      });
+    };
+    showBackground();
+    setInterval(() => {
+      backgroundIndex += 1;
+      showBackground();
+    }, 5000);
   }
 
   // === SCROLL-TOGGLE SCROLLED CLASS ===
@@ -68,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // === PROJECT MODALS ===
-  document.querySelectorAll('.project-card').forEach(card => {
+  document.querySelectorAll('.project-row').forEach(card => {
     const modalId = card.dataset.modalId;
     const modal   = document.getElementById(modalId);
     const content = modal?.querySelector('.modal-content');

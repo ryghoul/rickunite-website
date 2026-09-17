@@ -1,62 +1,171 @@
-/* ── PROJECTS GRID ───────────────────────────────────────────────────── */
+/* ── PROJECTS STACK ──────────────────────────────────────────────────── */
 
 .projects-section {
   padding: 30px 20px;
 }
 
-.projects-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1200px;
+.projects-stack {
+  display: flex;
+  flex-direction: column;
+  max-width: 820px;
   margin: 0 auto;
 }
 
-/* Project card base style */
-.project-card {
-  background: #fafafa;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.project-item {
+  position: relative;
+}
+
+/* rows overlap slightly, like a stacked deck of cards */
+.project-item + .project-item {
+  margin-top: -12px;
+}
+
+/* Project row base style */
+.project-row {
+  position: relative;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  background: #fafafa;
+  border: 1px solid rgba(17, 24, 39, 0.06);
+  border-radius: 14px;
+  padding: 0.85rem 1.25rem;
   cursor: pointer;
-  transform: translateY(0);
-  opacity: 0; /* for slide-in animation */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  opacity: 0; /* for stacked fan-out reveal */
+  transform: translateY(-22px) scale(0.97);
   transition:
-    transform 0.6s ease-out,
-    opacity 0.6s ease-out,
-    box-shadow 0.2s ease;
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease,
+    background-color 0.4s ease,
+    opacity 0.5s ease;
 }
 
-/* Hover state */
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+/* Hover / focus: pop the row out of the stack for a bigger preview */
+.project-row:hover,
+.project-row:focus-visible {
+  z-index: 5;
+  transform: translateY(-6px) scale(1.035);
+  background: #ffffff;
+  border-color: rgba(17, 24, 39, 0.12);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.18);
 }
 
-/* Card image – consistent aspect ratio */
+.project-row:focus-visible {
+  outline: 2px solid rgba(17, 24, 39, 0.3);
+  outline-offset: 2px;
+}
+
+/* Row index number */
+.project-row-num {
+  flex: 0 0 auto;
+  width: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-align: center;
+  color: rgba(17, 24, 39, 0.25);
+  transition: color 0.35s ease, transform 0.35s ease;
+}
+
+.project-row:hover .project-row-num {
+  color: #111827;
+  transform: scale(1.1);
+}
+
+/* Row thumbnail – consistent shape, snazzy zoom + tilt on hover */
 .project-img {
-  width: 100%;
-  aspect-ratio: 16 / 9;  /* keeps all cards same shape */
-  object-fit: cover;     /* crops nicely without squishing */
+  flex: 0 0 auto;
+  width: 100px;
+  height: 74px;
+  border-radius: 10px;
+  object-fit: cover;
   display: block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+}
+
+.project-row:hover .project-img {
+  transform: scale(1.1) rotate(-1.5deg);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+}
+
+.project-symbol {
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: #23465a;
+}
+
+.project-symbol-ngcp-weather {
+  background: #345b4b;
+}
+
+.project-symbol-morse-code {
+  background: #514467;
+  font-size: 1.6rem;
 }
 
 .project-info {
-  padding: 1rem;
   flex: 1;
+  min-width: 0;
 }
 
-/* Responsive grid */
-@media (max-width: 992px) {
-  .projects-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.project-info h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+.project-info p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #6b7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-row:hover .project-info h3 {
+  transform: translateX(4px);
+}
+
+/* Arrow cue that slides in on hover */
+.project-row-arrow {
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+  color: rgba(17, 24, 39, 0.25);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, color 0.35s ease;
+}
+
+.project-row:hover .project-row-arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: #111827;
+}
+
+/* Responsive */
 @media (max-width: 600px) {
-  .projects-container {
-    grid-template-columns: 1fr;
+  .project-row {
+    gap: 0.75rem;
+    padding: 0.7rem 0.9rem;
+  }
+
+  .project-img {
+    width: 68px;
+    height: 56px;
+  }
+
+  .project-row-num,
+  .project-row-arrow {
+    display: none;
   }
 }
 
@@ -72,10 +181,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem;
   z-index: 2000;
 
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(10, 10, 14, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 
   /* hidden by default */
   opacity: 0;
@@ -83,8 +194,8 @@
   pointer-events: none;
 
   transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
+    opacity 0.35s ease,
+    visibility 0.35s ease;
 }
 
 /* Shown state (JS adds .active) */
@@ -99,94 +210,144 @@
 
 .modal-content {
   position: relative;
-  background: #ffffff;
-  border-radius: 8px;
-  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  background: #f8f8f6;
+  border-top: 4px solid #d6a85f;
+  border-radius: 14px;
+  max-width: 960px;
   width: 100%;
-  max-height: 90vh;
-  padding: 1.5rem 1.5rem 1.25rem;
+  max-height: 88vh;
+  padding: 0 0 1.75rem;
   overflow-y: auto;
 
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
 
   /* start small & transparent – animated when modal is active */
-  transform: scale(0.8);
+  transform: scale(0.85) translateY(16px);
   opacity: 0;
 }
 
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(17, 24, 39, 0.15);
+  border-radius: 8px;
+}
+
 .project-link-btn {
-  display: inline-block;
-  padding: 0.55rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 1.1rem;
+  margin: 1.25rem 2rem 0;
   background: #111827;
   color: #fff;
-  border-radius: 6px;
+  border-radius: 999px;
   font-size: 0.9rem;
+  font-weight: 600;
   text-decoration: none;
-  transition: background 0.2s ease;
+  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .project-link-btn:hover {
   background: #1f2937;
-}
-
-.project-link-btn {
-  margin-bottom: 0.75rem;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 }
 
 .slideshow {
-  margin-top: 0.75rem;
+  margin: 1.5rem 2rem 0;
+  max-width: none;
+  border: 1px solid rgba(17, 24, 39, 0.1);
+  background: #111827;
 }
 
 /* Pop-in when parent modal becomes active */
 .project-modal.active .modal-content {
-  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: modalPopIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes popIn {
+@keyframes modalPopIn {
   0% {
     opacity: 0;
-    transform: scale(0.8);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.05);
+    transform: scale(0.85) translateY(16px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
   }
 }
 
-/* Close button */
+/* Close button — circular, spins into an X-hover state */
 .modal-close {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: none;
+  top: 1.05rem;
+  right: 1.5rem;
+  z-index: 2;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17, 24, 39, 0.06);
   border: none;
-  font-size: 2rem;
+  border-radius: 50%;
+  font-size: 1.4rem;
   line-height: 1;
+  color: #111827;
   cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-close:hover,
+.modal-close:focus-visible {
+  background: #111827;
+  color: #fff;
+  transform: rotate(90deg);
 }
 
 
 /* ── MODAL TYPOGRAPHY ───────────────────────────────────────────────── */
 
 .modal-content h3 {
-  margin-top: 0;
-  margin-bottom: 0.6rem;
-  font-size: 1.25rem;
-  font-weight: 600;
+  margin: 0;
+  padding: 1.5rem 5rem 1rem 2rem;
+  position: relative;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.12);
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 700;
+  color: #111827;
+}
+
+.modal-content h3::after {
+  content: "";
+  position: absolute;
+  left: 2rem;
+  bottom: -2px;
+  width: 42px;
+  height: 3px;
+  border-radius: 2px;
+  background: #111827;
 }
 
 .modal-content p {
-  margin: 0;
+  margin: 1.35rem 2rem 0;
+  max-width: 760px;
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.8;
+  text-wrap: pretty;
+  color: #374151;
 }
 
 .modal-content p + p {
-  margin-top: 0.75rem;
+  margin-top: 0.9rem;
 }
 
 
@@ -212,72 +373,53 @@
 /* On small screens, reduce padding a bit */
 @media (max-width: 600px) {
   .project-modal {
-    padding: 1.5rem 1rem;
+    padding: 0.75rem;
   }
 
   .modal-content {
-    padding: 1.25rem 1rem;
+    max-height: 92vh;
+    padding-bottom: 1.25rem;
+    border-radius: 12px;
+  }
+
+  .modal-content h3 {
+    padding: 1.25rem 4rem 0.85rem 1.25rem;
+  }
+
+  .modal-content h3::after {
+    left: 1.25rem;
+  }
+
+  .modal-content p {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+
+  .project-link-btn,
+  .slideshow {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
   }
 }
 
 
-/* ── PROJECT CARD SLIDE-IN ANIMATIONS ───────────────────────────────── */
+/* ── PROJECT STACK FAN-OUT REVEAL ─────────────────────────────────────── */
+/* Rows start gathered near the top of the stack, then fan down into place. */
 
-/* Initial off-screen positions per card */
-.project-item:nth-child(1) .project-card { transform: translateX(-50px); }
-.project-item:nth-child(2) .project-card { transform: translateY(-50px); }
-.project-item:nth-child(3) .project-card { transform: translateX(50px);  }
-.project-item:nth-child(4) .project-card { transform: translateY(50px);  }
-.project-item:nth-child(5) .project-card { transform: translateX(-50px); }
-.project-item:nth-child(6) .project-card { transform: translateX(-50px); }
-.project-item:nth-child(7) .project-card { transform: translateX(-50px); }
-.project-item:nth-child(8) .project-card { transform: translateX(-50px); }
-.project-item:nth-child(9) .project-card { transform: translateX(-50px); }
+.projects-section.visible .project-row {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
 
-/* When .projects-section gets .visible, slide them into place */
-.projects-section.visible .project-item:nth-child(1) .project-card {
-  opacity: 1;
-  transform: translateX(0);
-  transition-delay: 0.4s;
-}
-.projects-section.visible .project-item:nth-child(2) .project-card {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.6s;
-}
-.projects-section.visible .project-item:nth-child(3) .project-card {
-  opacity: 1;
-  transform: translateX(0);
-  transition-delay: 0.8s;
-}
-.projects-section.visible .project-item:nth-child(4) .project-card {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 1.0s;
-}
-.projects-section.visible .project-item:nth-child(5) .project-card {
-  opacity: 1;
-  transform: translateX(0);
-  transition-delay: 1.2s;
-}
-.projects-section.visible .project-item:nth-child(6) .project-card {
-  opacity: 1;
-  transform: translateX(0);
-  transition-delay: 1.4s;
-}
-.projects-section.visible .project-item:nth-child(7) .project-card {
-  opacity: 1;
-  transform: translateX(0);
-  transition-delay: 1.6s;
-}
-.projects-section.visible .project-item:nth-child(8) .project-card {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 1.8s;
-}
-.projects-section.visible .project-item:nth-child(9) .project-card {
-  opacity: 1;
-  transform: translateX(0);
-  transition-delay: 2.0s;
-}
+.project-item:nth-child(1) .project-row { transition-delay: 0.05s; }
+.project-item:nth-child(2) .project-row { transition-delay: 0.15s; }
+.project-item:nth-child(3) .project-row { transition-delay: 0.25s; }
+.project-item:nth-child(4) .project-row { transition-delay: 0.35s; }
+.project-item:nth-child(5) .project-row { transition-delay: 0.45s; }
+.project-item:nth-child(6) .project-row { transition-delay: 0.55s; }
+.project-item:nth-child(7) .project-row { transition-delay: 0.65s; }
+.project-item:nth-child(8) .project-row { transition-delay: 0.75s; }
+.project-item:nth-child(9) .project-row { transition-delay: 0.85s; }
+.project-item:nth-child(10) .project-row { transition-delay: 0.95s; }
+.project-item:nth-child(11) .project-row { transition-delay: 1.05s; }
 
